@@ -1,10 +1,11 @@
 #include <iostream>
 #include <string>
-#include <optional>
+#include <chrono>
 
 #include <bfio/SourceFile/Loader.hpp>
 #include <bfio/Parser/Parser.hpp>
 #include <bfio/SyntaxAnalyzer/SyntaxAnalyzer.hpp>
+#include <bfio/Interpreter/Interpreter.hpp>
 
 int main(int argc, char** argv) {
 /*
@@ -18,7 +19,7 @@ int main(int argc, char** argv) {
     std::cout << "Content: \n" << bfio::load_file(path) << "\n";
 */
     std::cout << "Parser : \n";
-    auto src = bfio::SourceFile("...[[[][]]]]...");
+    auto src = bfio::SourceFile("++++++++++[>+++++++>++++++++++>+++>+<<<<-]>++.>+.+++++++..+++.>++.<<+++++++++++++++.>.+++.------.--------.>+.>.");
     bfio::Parser parser(src);
     for(auto const& error : parser.get_errors()) {
         error.dump(std::cout, src);
@@ -32,8 +33,17 @@ int main(int argc, char** argv) {
 
     std::cout << "Commands : \n";
     for(auto const& cmd : analyzer.get_commands()) {
-        std::cout << static_cast<int>(cmd.type) << std::endl;
+        std::cout << static_cast<int>(cmd.type);
     }
+    std::cout << std::endl;
+
+    bfio::Interpreter interpreter(analyzer.get_commands());
+    interpreter.load_input("hazurl");
+    auto start = std::chrono::system_clock::now();
+    interpreter.run();
+    auto end = std::chrono::system_clock::now();
+    std::cout << std::endl;
+    std::cout << "Time : " << std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count() / 1000000000. << std::endl;
 
     return 0;
 }

@@ -83,7 +83,7 @@ void SyntaxAnalyzer::analyze() {
                 break;
             case TokenType::BEGIN_LOOP:
             {
-                cmd.type = Command::Type::BRANCH_NOT_0;
+                cmd.type = Command::Type::BRANCH_0;
                 std::optional<unsigned int> end = get_end_loop();
                 if (!end.has_value()) {
                     errors.push_back({SyntaxError::Type::NO_START_OF_LOOP, token});

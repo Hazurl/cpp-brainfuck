@@ -1,4 +1,4 @@
-#include <bfio/Loader/Loader.hpp>
+#include <bfio/SourceFile/Loader.hpp>
 
 #include <fstream>
 #include <iterator>

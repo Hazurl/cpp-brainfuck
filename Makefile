@@ -2,7 +2,7 @@
 #                     SRC                    #
 ##############################################
 # All directories to build (inside source/)
-DIR := Loader
+DIR := SourceFile Token Parser
 # Directories with source/ prefix
 SRC_DIR := $(addprefix source/,$(DIR))
 # All .cpp files
